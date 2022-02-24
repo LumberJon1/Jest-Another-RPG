@@ -18,5 +18,8 @@
   "homepage": "https://github.com/LumberJon1/Jest-Another-RPG#readme",
   "devDependencies": {
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.0"
   }
 }
