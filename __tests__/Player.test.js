@@ -34,3 +34,60 @@ test("Gets inventory from player or returns false", () => {
 
     expect(player.getInventory()).toEqual(false);
 });
+
+test("Gets player health value", function() {
+    const player = new Player("Saruman");
+
+    expect(player.getHealth()).toEqual(expect.stringContaining(player.health.toString()));
+});
+
+test("Checks whether the player is alive", function() {
+    const player = new Player("Gandalf");
+
+    expect(player.isAlive()).toBeTruthy();
+
+    player.health = 0;
+
+    expect(player.isAlive()).toBeFalsy();
+});
+
+test("Subtracts from player's health", () => {
+    const player = new Player("Aragorn");
+    const oldHealth = player.health;
+
+    player.reduceHealth(5);
+
+    expect(player.health).toEqual(oldHealth - 5);
+
+    player.reduceHealth(9999);
+
+    expect(player.health).toBe(0);
+});
+
+test("Gets the player's attack value", function() {
+    const player = new Player("Gollum");
+    player.strength = 10;
+
+    expect(player.getAttackValue()).toBeGreaterThanOrEqual(5);
+    expect(player.getAttackValue()).toBeLessThanOrEqual(15);
+});
+
+test("Adds a potion to the inventory", function() {
+    const player = new Player("Frodo");
+    const oldCount = player.inventory.length;
+
+    player.addPotion(new Potion());
+
+    expect(player.inventory.length).toBeGreaterThan(oldCount);
+});
+
+test("Removes a potion from the player's inventory", () => {
+    const player = new Player("Bilbo");
+    player.inventory = [new Potion(), new Potion(), new Potion()];
+    const oldCount = player.inventory.length;
+
+    player.usePotion(1);
+
+    expect(player.inventory.length).toBeLessThan(oldCount);
+});
+
